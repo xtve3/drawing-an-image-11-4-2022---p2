@@ -1,9 +1,10 @@
 //Global Variables
 int appWidth, appHeight;
 Boolean widthLarger=false, heightLarger=false;
+Boolean widthLarger2=false, heightLarger2=false;
 float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
-PImage pic;
+PImage pic, pic2, pic3;
 Boolean nightMode=false;
 int tintDayMode=255, tintDayModeOpacity=100;
 int tintRed=255, tintGreen=105, tintBlue=100, tintNightModeOpacity=1000;
@@ -21,8 +22,12 @@ void setup()
   //Note: Dimensions are found in the image file / Right Click / Properties / Details
   int picWidth = 800;
   int picHeight = 600;
+  int pic2Width = 759 ; //landscape image
+  int pic2Height = 604 ; //landscape
+  //int pic3Width = ; //portrait image
+  //int pic3Height = ; //portrait
   //
-  float smallerDimension, largerDimension;
+  float smallerDimension, largerDimension, smallerDimension2, largerDimension2;
   //Image Orientation: Landscape, Portrait, Square
   if ( picWidth >= picHeight ) { //True if Landscape or Square
     largerDimension = picWidth;
@@ -32,6 +37,17 @@ void setup()
     largerDimension = picHeight;
     smallerDimension = picWidth;
     heightLarger = true;
+  }
+  //
+  if ( pic2Width >= pic2Height ) { //True if Landscape or Square
+    largerDimension2 = pic2Width;
+    smallerDimension2 = pic2Height;
+    widthLarger2 = true;
+    //Landscape large image to larger space OR smaller space
+  } else { //False if Portrait
+    largerDimension2 = pic2Height;
+    smallerDimension2 = pic2Width;
+    heightLarger2 = true;
   }
   //
     //Teaching example, width is known to be larger
@@ -64,7 +80,9 @@ void setup()
   println("adjusted image dimensions are: (stretch is goal)", picWidthAdjusted, picHeightAdjusted);
   //
   //Population
-pic = loadImage("../Images Used/karl.jpg");
+pic = loadImage("../Images Used/LandScape/karl.jpg");
+pic2 = loadImage("../Images Used/LandScape/googlelmao.JPG");
+//pic3 = loadImage("");
 backgroundImageX = appWidth*0;
 backgroundImageY = appHeight*0;
 backgroundImageWidth = appWidth-1;
@@ -80,9 +98,6 @@ rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageH
 rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight); //top half
 rect(bruhX, bruhY, bruhWidth, bruhHeight); //bottom half
 //
-//shapes presented when ran
-rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight);
-rect(bruhX, bruhY, bruhWidth, bruhHeight);
 //Background Image must be single executed code
   if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
   if (nightMode == true) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: nightMode
@@ -92,7 +107,8 @@ rect(bruhX, bruhY, bruhWidth, bruhHeight);
 }//End setup
 //
 void draw() {
-
+image(pic2, yourmomX, yourmomY, yourmomWidth, yourmomHeight);
+//image(pic3, bruhX, bruhY, bruhWidth, bruhHeight);
 }//End draw
 //
 void keyPressed() {
