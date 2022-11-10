@@ -5,6 +5,9 @@ float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 PImage pic;
 Boolean nightMode=false;
+int tintDayMode=255, tintDayModeOpacity=100;
+int tintRed=255, tintGreen=105, tintBlue=100, tintNightModeOpacity=1000;
+float bruhX, bruhY, bruhWidth, bruhHeight, yourmomX, yourmomY, yourmomWidth, yourmomHeight;
 //
 void setup()
 {
@@ -66,21 +69,30 @@ backgroundImageX = appWidth*0;
 backgroundImageY = appHeight*0;
 backgroundImageWidth = appWidth-1;
 backgroundImageHeight = appHeight-1;
+yourmomX = bruhX = appWidth * 1.55/5;
+yourmomY = appHeight * 0.55/10;
+bruhY = appHeight * 3.5/5;
+yourmomWidth = bruhWidth = appWidth * 2/6;
+yourmomHeight = bruhHeight = appHeight * 1.2/6;
 //
 //Rectangular Layout and Image Drawing to CANVAS
-//rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight); //top half
+rect(bruhX, bruhY, bruhWidth, bruhHeight); //bottom half
 //
+//shapes presented when ran
+rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight);
+rect(bruhX, bruhY, bruhWidth, bruhHeight);
 //Background Image must be single executed code
-  if (nightMode == false) tint(255, 128); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+  if (nightMode == true) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: nightMode
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
   //
 }//End setup
 //
 void draw() {
-   if (nightMode == true) 
-   tint(255, 105, 100); //RGB: Night Mode
-   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+
 }//End draw
 //
 void keyPressed() {
@@ -90,14 +102,16 @@ void mousePressed() {
   //
   //Mouse Pressed will control background image
  if (mouseButton == LEFT) {
- nightMode = true; 
- tint(255, 50); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+ nightMode = false; 
+ rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+ tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
   //
  }
  if (mouseButton == RIGHT){ 
-   nightMode = false;
-     tint(255, 105, 100); //RGB: Night Mode
+   nightMode = true;
+   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+     tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
  }
 }//End mousePressed
