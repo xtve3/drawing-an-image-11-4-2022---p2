@@ -80,6 +80,7 @@ void setup()
   println("adjusted image dimensions are: (stretch is goal)", picWidthAdjusted, picHeightAdjusted);
   //
   //Population
+  //.. stands for back, / stands for double click
 pic = loadImage("../Images Used/LandScape/karl.jpg");
 pic2 = loadImage("../Images Used/LandScape/googlelmao.JPG");
 //pic3 = loadImage("");
