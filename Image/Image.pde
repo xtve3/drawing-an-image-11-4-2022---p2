@@ -1,13 +1,12 @@
 //Global Variables
 int appWidth, appHeight;
-Boolean widthLarger=false, heightLarger=false;
-Boolean widthLarger2=false, heightLarger2=false;
-float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
+float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
+float picWidthAdjusted1=0.0, picHeightAdjusted1=0.0;
 float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0;
-//float picWidthAdjusted3=0.0, picHeightAdjusted3=0.0;
+float picWidthAdjusted3=0.0, picHeightAdjusted3=0.0;
+
 float bruhX, bruhY, bruhWidth, bruhHeight; //bottom half
 float yourmomX, yourmomY, yourmomWidth, yourmomHeight; //top half
-float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
 PImage pic, pic2, pic3;
 Boolean nightMode=false;
 int tintDayMode=255, tintDayModeOpacity=100;
@@ -41,7 +40,6 @@ void setup()
   //
   //Image Dimensions for Aspect Ratio: image meta data
   //Note: meta explored in MP3's or music files
-  //karl.jpg
   //Note: Dimensions are found in the image file / Right Click / Properties / Details
   int picWidth1 = 800; //karl landscape
   int picHeight1 = 600; 
@@ -50,18 +48,58 @@ void setup()
   int picWidth3 = 278; //door portrait image
   int picHeight3 = 600; 
   //
-  float smallerDimension, largerDimension, smallerDimension2, largerDimension2;
   //Image Orientation: Landscape, Portrait, Square
-  if ( picWidth >= picHeight ) { //True if Landscape or Square
-    largerDimension = picWidth;
-    smallerDimension = picHeight;
-    widthLarger = true;
+  //Scaling Image size with aspect ratio requires larger dimension
+  float smallerDimension1, smallerDimension2, smallerDimension3;
+  float largerDimension1, largerDimension2, largerDimension3;
+  float imageWidthRatio1=0.0, imageHeightRatio1=0.0;
+  float imageHeightRatio2=0.0, imageWidthRatio2=0.0;
+  float imageHeightRatio3=0.0, imageWidthRatio3=0.0;
+  if ( picWidth1 >= picHeight1 ) { //True if Landscape or Square
+    largerDimension1 = picWidth1;
+    smallerDimension1 = picHeight1;
+    //
+    picWidthAdjusted1 = backgroundImageWidth; //from rect() layout
+    imageHeightRatio1 = smallerDimension1 / largerDimension1;
+    picHeightAdjusted1 = picWidthAdjusted1 * imageHeightRatio1;
   } else { //False if Portrait
-    largerDimension = picHeight;
-    smallerDimension = picWidth;
-    heightLarger = true;
+    largerDimension1 = picHeight1;
+    smallerDimension1 = picWidth1;
+    //
+    picHeightAdjusted1 = backgroundImageHeight; //from rect() layout
+    imageWidthRatio1 = smallerDimension1 / largerDimension1;
+    picWidthAdjusted1 = picHeightAdjusted1 * imageWidthRatio1;
   }
-  //
+  if ( picWidth2 >= picHeight2 ) { //True if Landscape or Square
+    largerDimension2 = picWidth2;
+    smallerDimension2 = picHeight2;
+    //
+    picWidthAdjusted2 = yourmomWidth; //from rect() layout
+    imageHeightRatio2 = smallerDimension2 / largerDimension2;
+    picHeightAdjusted2 = picWidthAdjusted2 * imageHeightRatio2;
+  } else { //False if Portrait
+    largerDimension2 = picHeight2;
+    smallerDimension2 = picWidth2;
+    //
+    picHeightAdjusted2 = yourmomHeight; //from rect() layout
+    imageWidthRatio2 = smallerDimension2 / largerDimension2;
+    picWidthAdjusted2 = picHeightAdjusted2 * imageWidthRatio2;
+  }
+  if ( picWidth3 >= picHeight3 ) { //True if Landscape or Square
+    largerDimension3 = picWidth3;
+    smallerDimension3 = picHeight3;
+    //
+    picWidthAdjusted3 = bruhWidth; //from rect() layout
+    imageHeightRatio3 = smallerDimension3 / largerDimension3;
+    picHeightAdjusted3 = picWidthAdjusted3 * imageHeightRatio3;
+  } else { //False if Portrait
+    largerDimension3 = picHeight3;
+    smallerDimension3 = picWidth3;
+    //
+    picHeightAdjusted3 = bruhHeight; //from rect() layout
+    imageWidthRatio3 = smallerDimension3 / largerDimension3;
+    picWidthAdjusted3 = picHeightAdjusted3 * imageWidthRatio3;
+  }
   if ( pic2Width >= pic2Height ) { //True if Landscape or Square
     largerDimension2 = pic2Width;
     smallerDimension2 = pic2Height;
@@ -73,9 +111,8 @@ void setup()
     heightLarger2 = true;
   }
   //
-    //Teaching example, width is known to be larger
-  float imageWidthRatio=0.0, imageHeightRatio=0.0;
-  float imageHeightRatio2=0.0, imageWidthRatio2=0.0;
+  //Teaching example, width is known to be larger
+
   //Better Image Stretch Algorithm, smaller image to larger CANVAS
   if ( appWidth >= picWidth ) {
     picWidthAdjusted = appWidth;
@@ -100,22 +137,22 @@ void setup()
   //Image is either larger or smaller than rect (including CANVAS)
   //Google image: landscape into landscape 
   if ( widthLarger2 == true ) { //Landscape or sqaure is TRUE
-  picWidthAdjusted2 = yourmomWidth;
-  imageHeightRatio2 = smallerDimension2 / largerDimension2;
-  picHeightAdjusted2 = picWidthAdjusted2 * imageHeightRatio2;
+    picWidthAdjusted2 = yourmomWidth;
+    imageHeightRatio2 = smallerDimension2 / largerDimension2;
+    picHeightAdjusted2 = picWidthAdjusted2 * imageHeightRatio2;
   } else { //portrait is TRUE, heightLarger2==true
-  picHeightAdjusted2 = yourmomHeight;
-  imageWidthRatio2 = smallerDimension2 / largerDimension2;
-  picHeightAdjusted2 = picHeightAdjusted2 * imageWidthRatio2;
+    picHeightAdjusted2 = yourmomHeight;
+    imageWidthRatio2 = smallerDimension2 / largerDimension2;
+    picHeightAdjusted2 = picHeightAdjusted2 * imageWidthRatio2;
   }
   //
   //verifying variable values
-  println("app width:", appWidth,"and app height:", appHeight);
+  println("app width:", appWidth, "and app height:", appHeight);
   println ("larger image diension is:", largerDimension);
   println("image dimensions are:", picWidth, picHeight);
   println("adjusted image dimensions are: (stretch is goal)", picWidthAdjusted, picHeightAdjusted);
   //
-  println("app width:", pic2Width,"and app height:", pic2Height);
+  println("app width:", pic2Width, "and app height:", pic2Height);
   println ("larger image diension is:", widthLarger2, "or", heightLarger2);
   println("Rectangle dimensions are:", yourmomWidth, yourmomHeight );
   println("Scale Ratios, width: ", "height is", imageHeightRatio2);
@@ -136,8 +173,8 @@ void setup()
 //
 void draw() 
 {
-image(pic2, yourmomX, yourmomY, picWidthAdjusted2, picHeightAdjusted2);
-image(pic3, bruhX, bruhY, picWidthAdjusted3, picHeightAdjusted3);
+  image(pic2, yourmomX, yourmomY, picWidthAdjusted2, picHeightAdjusted2);
+  image(pic3, bruhX, bruhY, picWidthAdjusted3, picHeightAdjusted3);
 }//End draw
 //
 void keyPressed() {
@@ -146,19 +183,19 @@ void keyPressed() {
 void mousePressed() {
   //
   //Mouse Pressed will control background image
- if (mouseButton == LEFT) {
- nightMode = false; 
- rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
- tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
-  image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
-  //
- }
- if (mouseButton == RIGHT){ 
-   nightMode = true;
-   rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-     tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
-   image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
- }
+  if (mouseButton == LEFT) {
+    nightMode = false; 
+    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+    tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
+    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+    //
+  }
+  if (mouseButton == RIGHT) { 
+    nightMode = true;
+    rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+    tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: Night Mode
+    image( pic, backgroundImageX, backgroundImageY, picWidthAdjusted, picHeightAdjusted);
+  }
 }//End mousePressed
 //
 //End Main Program
