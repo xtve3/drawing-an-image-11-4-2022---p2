@@ -23,7 +23,7 @@ void setup()
   //.. stands for back, / stands for double click
   pic = loadImage("../Images Used/LandScape/karl.jpg");
   pic2 = loadImage("../Images Used/LandScape/googlelmao.JPG");
-  //pic3 = loadImage("../Images Used/Portrait/solid-5-panel-wood-ed.png");
+  pic3 = loadImage("../Images Used/Portrait/solid-5-panel-wood-ed.png");
   backgroundImageX = appWidth*0;
   backgroundImageY = appHeight*0;
   backgroundImageWidth = appWidth-1;
