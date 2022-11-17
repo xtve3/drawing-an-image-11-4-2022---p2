@@ -4,6 +4,7 @@ Boolean widthLarger=false, heightLarger=false;
 Boolean widthLarger2=false, heightLarger2=false;
 float picWidthAdjusted=0.0, picHeightAdjusted=0.0;
 float picWidthAdjusted2=0.0, picHeightAdjusted2=0.0;
+//float picWidthAdjusted3=0.0, picHeightAdjusted3=0.0;
 float bruhX, bruhY, bruhWidth, bruhHeight; //bottom half
 float yourmomX, yourmomY, yourmomWidth, yourmomHeight; //top half
 float backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight;
@@ -16,33 +17,38 @@ void setup()
 {
   size(1000, 800); //Landscape
   //Copy Display Algorithm from Hello World
+  //fullScreen(); //displayWidth, displayHeight
   appWidth = width;
   appHeight = height;
   //
   //Population
   //.. stands for back, / stands for double click
-pic = loadImage("../Images Used/LandScape/karl.jpg");
-pic2 = loadImage("../Images Used/LandScape/googlelmao.JPG");
-//pic3 = loadImage("../Images Used/Portrait/solid-5-panel-wood-ed.png");
-backgroundImageX = appWidth*0;
-backgroundImageY = appHeight*0;
-backgroundImageWidth = appWidth-1;
-backgroundImageHeight = appHeight-1;
-yourmomX = bruhX = appWidth * 1.55/5;
-yourmomY = appHeight * 0.55/10;
-bruhY = appHeight * 3.5/5;
-yourmomWidth = bruhWidth = appWidth * 2/6;
-yourmomHeight = bruhHeight = appHeight * 1.2/6;
-//
-  //Image Dimensions for Aspect Ratio
+  pic = loadImage("../Images Used/LandScape/karl.jpg");
+  pic2 = loadImage("../Images Used/LandScape/googlelmao.JPG");
+  //pic3 = loadImage("../Images Used/Portrait/solid-5-panel-wood-ed.png");
+  backgroundImageX = appWidth*0;
+  backgroundImageY = appHeight*0;
+  backgroundImageWidth = appWidth-1;
+  backgroundImageHeight = appHeight-1;
+  yourmomX = appWidth * 1.55/5;
+  bruhX = appWidth * 1.55/5;
+  yourmomY = appHeight * 0.55/10;
+  bruhY = appHeight * 3.5/5;
+  yourmomWidth = appWidth * 2/6;
+  bruhWidth = appWidth * 2/6;
+  yourmomHeight = appHeight * 1.2/6;
+  bruhHeight = appHeight * 1.2/6;
+  //
+  //Image Dimensions for Aspect Ratio: image meta data
+  //Note: meta explored in MP3's or music files
   //karl.jpg
   //Note: Dimensions are found in the image file / Right Click / Properties / Details
-  int picWidth = 800;
-  int picHeight = 600;
-  int pic2Width = 759 ; //landscape image
-  int pic2Height = 604 ; //landscape
-  //int pic3Width = ; //portrait image
-  //int pic3Height = ; //portrait
+  int picWidth1 = 800; //karl landscape
+  int picHeight1 = 600; 
+  int picWidth2 = 759; //google landscape image
+  int picHeight2 = 604; 
+  int picWidth3 = 278; //door portrait image
+  int picHeight3 = 600; 
   //
   float smallerDimension, largerDimension, smallerDimension2, largerDimension2;
   //Image Orientation: Landscape, Portrait, Square
@@ -109,18 +115,18 @@ yourmomHeight = bruhHeight = appHeight * 1.2/6;
   println("image dimensions are:", picWidth, picHeight);
   println("adjusted image dimensions are: (stretch is goal)", picWidthAdjusted, picHeightAdjusted);
   //
-   println("app width:", pic2Width,"and app height:", pic2Height);
+  println("app width:", pic2Width,"and app height:", pic2Height);
   println ("larger image diension is:", widthLarger2, "or", heightLarger2);
   println("Rectangle dimensions are:", yourmomWidth, yourmomHeight );
   println("Scale Ratios, width: ", "height is", imageHeightRatio2);
   println("adjusted image dimensions are: (stretch is goal):", picWidthAdjusted, picHeightAdjusted);
   //
-//Rectangular Layout and Image Drawing to CANVAS
-rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
-rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight); //top half
-rect(bruhX, bruhY, bruhWidth, bruhHeight); //bottom half
-//
-//Background Image must be single executed code
+  //Rectangular Layout and Image Drawing to CANVAS
+  rect( backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight );
+  rect(yourmomX, yourmomY, yourmomWidth, yourmomHeight); //top half
+  rect(bruhX, bruhY, bruhWidth, bruhHeight); //bottom half
+  //
+  //Background Image must be single executed code
   if (nightMode == false) tint(tintDayMode, tintDayModeOpacity); //Gray Scale: use 1/2 tint value for white (i.e. 128/256=1/2)
   if (nightMode == true) tint(tintRed, tintGreen, tintBlue, tintNightModeOpacity); //RGB: nightMode
   //image( pic, backgroundImageX, backgroundImageY, backgroundImageWidth, backgroundImageHeight);
@@ -128,9 +134,10 @@ rect(bruhX, bruhY, bruhWidth, bruhHeight); //bottom half
   //
 }//End setup
 //
-void draw() {
+void draw() 
+{
 image(pic2, yourmomX, yourmomY, picWidthAdjusted2, picHeightAdjusted2);
-//image(pic3, bruhX, bruhY, bruhWidth, bruhHeight);
+image(pic3, bruhX, bruhY, picWidthAdjusted3, picHeightAdjusted3);
 }//End draw
 //
 void keyPressed() {
