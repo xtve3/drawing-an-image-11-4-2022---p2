@@ -84,7 +84,7 @@ void setup()
     imageWidthRatio2 = smallerDimension2 / largerDimension2;
     picWidthAdjusted2 = picHeightAdjusted2 * imageWidthRatio2;
   }
-  if ( picWidth3 >= picHeight3 ) { //True if Landscape or Square
+    if ( picWidth3 >= picHeight3 ) { //True if Landscape or Square
     largerDimension3 = picWidth3;
     smallerDimension3 = picHeight3;
     //
